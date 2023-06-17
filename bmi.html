@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BMI Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      text-align: center;
+    }
+    #bmi-form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>BMI Calculator</h1>
+  <div id="bmi-form">
+    <form onsubmit="calculateBMI(event)">
+      <label for="weight">Weight (in kg):</label>
+      <input type="number" id="weight" required>
+      <label for="height">Height (in cm):</label>
+      <input type="number" id="height" required>
+      <input type="submit" value="Calculate BMI">
+    </form>
+    <div id="result"></div>
+  </div>
+  
+  <script>
+    function calculateBMI(event) {
+      event.preventDefault();
+
+      // Get the weight and height values
+      var weightInput = document.getElementById("weight");
+      var heightInput = document.getElementById("height");
+      var weight = parseFloat(weightInput.value);
+      var height = parseFloat(heightInput.value);
+
+      // Validate the input values
+      if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+        alert("Please enter valid weight and height values.");
+        return;
+      }
+
+      // Calculate the BMI
+      var bmi = weight / ((height / 100) ** 2);
+
+      // Display the result
+      var resultElement = document.getElementById("result");
+      resultElement.textContent = "Your BMI is: " + bmi.toFixed(2);
+    }
+  </script>
+</body>
+</html>
